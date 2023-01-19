@@ -146,3 +146,13 @@ allow_anonymous false
 password_file /etc/mosquitto/passwordfile
 tls_version tlsv1.2
 ```
+## Preparing OVMS for MQTT & Certificates
+### Certificate Authority Import
+In order for OVMS to connect to MQTT with TLS, it must have the Certificate Authority within its trusted certificate list. If you go to 'Tools' > 'Shell' and input the command below, it will list the trusted Certificate Authorities currently on the module:
+```
+tls trust list
+```
+To put our own Certificate Authority on the OVMS module, we must first create a folder, then create a file for the raw Certificate Authority data. A folder can be created by going to 'Tools' > 'Editor', then pressing the 'New dir' button. The new folder should be called "trustedca" and be a sub-folder of "store":
+```
+/store/trustedca/
+```
