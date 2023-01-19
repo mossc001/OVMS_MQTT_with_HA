@@ -106,3 +106,42 @@ broker.crt  broker.csr  broker.key
 #### Certificate for Client
 A certificate for the client is not required for OVMS as it only needs to have the CA certificate on the module to validate the broker certificate.
 If you do want to generate a client certificate, follow the same process as 'Certificate for MQTT Broker', but change the Common Name to the hostname of the client.
+
+### MQTT Configuration File Modifications
+As we don't want to put client certificates on all our existing MQTT devices that may be on our local network, but we do want TLS for external, we must split the MQTT configuration file by listeners/ports.
+We want the following:
+- Port 1883 - Internal only without encryption and no password (my setup)
+- Port 8883 - External only with encryption and password
+Further to the above, we must also reference our certificates generated in the prior steps. If you kept the pathes the same as above, the configuration path for the certificates will be correct in the below:
+```
+$ nano /etc/mosquitto/mosquitto.conf
+
+# Place your local configuration in /etc/mosquitto/conf.d/
+#
+# A full description of the configuration file is at
+# /usr/share/doc/mosquitto/examples/mosquitto.conf.example
+
+pid_file /run/mosquitto/mosquitto.pid
+
+persistence true
+persistence_location /var/lib/mosquitto/
+
+log_dest file /var/log/mosquitto/mosquitto.log
+
+include_dir /etc/mosquitto/conf.d
+
+per_listener_settings true
+
+# Per listener 
+port 1883
+allow_anonymous true
+
+listener 8883
+cafile /etc/mosquitto/certs/ca/ca.crt
+certfile /etc/mosquitto/certs/broker/broker.crt
+keyfile /etc/mosquitto/certs/broker/broker.key
+#require_certificate true
+allow_anonymous false
+password_file /etc/mosquitto/passwordfile
+tls_version tlsv1.2
+```
