@@ -115,7 +115,8 @@ We want the following:
 Further to the above, we must also reference our certificates generated in the prior steps. If you kept the pathes the same as above, the configuration path for the certificates will be correct in the below:
 ```
 $ nano /etc/mosquitto/mosquitto.conf
-
+```
+```
 # Place your local configuration in /etc/mosquitto/conf.d/
 #
 # A full description of the configuration file is at
