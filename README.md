@@ -90,3 +90,16 @@ Check your certificates and keys are there.
 $ ls
 broker.csr  broker.key
 ```
+Now we can pass the Certificate Signing Request (csr) file to our validation authority:
+```
+$ openssl x509 -req -in broker.csr -CA ../ca/ca.crt -CAkey ../ca/ca.key -CAcreateserial -out broker.crt -days 100
+Signature ok
+subject=C = FR, ST = France, L = Strasbourg, O = opeNest, CN = localhost, emailAddress = contact@openest.io
+Getting CA Private Key
+Enter pass phrase for ../ca/ca.key:
+```
+Check your certificates and keys are there.
+```
+$ ls
+broker.crt  broker.csr  broker.key
+```
