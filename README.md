@@ -103,3 +103,6 @@ Check your certificates and keys are there.
 $ ls
 broker.crt  broker.csr  broker.key
 ```
+#### Certificate for Client
+A certificate for the client is not required for OVMS as it only needs to have the CA certificate on the module to validate the broker certificate.
+If you do want to generate a client certificate, follow the same process as 'Certificate for MQTT Broker', but change the Common Name to the hostname of the client.
