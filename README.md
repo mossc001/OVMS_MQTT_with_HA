@@ -1,4 +1,4 @@
-# OMVS using MQTT and Home Assistant
+# OVMS using MQTT and Home Assistant
 ## Overview
 This guide shows you link your Open Vehicle Monitoring System (https://www.openvehicles.com/) to use your own MQTT server with TLS encryption, while also reading the data within Home Assistant.
 
