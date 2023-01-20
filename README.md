@@ -3,7 +3,7 @@
 This guide shows you link your Open Vehicle Monitoring System (https://www.openvehicles.com/) to use your own MQTT server with TLS encryption, while also reading the data within Home Assistant.
 
 ## Preparing MQTT Broker
-For the purpose of this section, I will be using a pre-existing Mosquitto MQTT Broker.
+For the purpose of this section, I will be using a pre-existing Mosquitto MQTT Broker. Credit to https://openest.io/ for the majority of the content for the Certificate Generation, slightly modified for my purpose.
 
 ### Certificate Generation
 #### Certificate Authority [CA]
@@ -198,3 +198,16 @@ To validate if your Certificate Authority has been loaded, simply enter the belo
 ```
 tls trust list
 ```
+## Configuring OVMS Server V3 (MQTT)
+### Server V3 (MQTT) configuration
+Navigate to Server V3 (MQTT) configuration page 'Config' > 'Server V3 (MQTT)', and you will be presented with the standard MQTT configuration screen.
+Input the specifics of your MQTT server, see example below:
+```
+Server: mqtt.cheese.com
+Enable TLS: ENABLED / TICKED
+Port: 8883
+Username: YOUR SETUP USERNAME (Not in this guide)
+Password: YOUR SETUP PASSWORD (Not in this guide)
+```
+You should setup the intervals as fit or use the defaults.
+Once setup, you will need need to restart Server V3 (MQTT) by pressing 'Stop V3', then 'Start V3' from the 'Status' menu.
