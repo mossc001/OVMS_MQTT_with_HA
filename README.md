@@ -215,6 +215,8 @@ Once setup, you will need need to restart Server V3 (MQTT) by pressing 'Stop V3'
 ## Verifying The MQTT Messages
 I would recommend verying the messages using a client such as MQTT Explorer (http://mqtt-explorer.com/). Apart from verifying the messages, you can see all of the messages available from OVMS.
 
+Note that you will need to turn off "Validate Certificate" in MQTT Explorer as the CA you created cannot be truly verified.
+
 ## Home Assistant Configuration
 ### Sensors & YAML
 The below assumes that you already have Home Assistant running and a broker configured within Home Assistant.
