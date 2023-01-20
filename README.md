@@ -212,6 +212,38 @@ Password: YOUR SETUP PASSWORD (Not in this guide)
 You should setup the intervals as fit or use the defaults.
 Once setup, you will need need to restart Server V3 (MQTT) by pressing 'Stop V3', then 'Start V3' from the 'Status' menu.
 
+## Verifying The MQTT Messages
+I would recommend verying the messages using a client such as MQTT Explorer (http://mqtt-explorer.com/). Apart from verifying the messages, you can see all of the messages available from OVMS.
+
 ## Home Assistant Configuration
 ### Sensors & YAML
-
+The below assumes that you already have Home Assistant running and a broker configured within Home Assistant.
+The sensors are examples of what can be configured but they will need to be modified based on your MQTT topics in use with OVMS which vary on your setup:
+```
+mqtt:
+  binary_sensor:
+    - name: "OVMS 12V Battery Alert"
+      state_topic: "ovms/CAR/UNIQUEID/metric/v/b/12v/voltage/alert"
+      icon: mdi:car-battery
+  sensor:
+    - name: "OVMS GPS Latitude"
+      state_topic: "ovms/CAR/UNIQUEID/metric/v/p/latitude"
+      icon: mdi:latitude
+    - name: "OVMS GPS Longitude"
+      state_topic: "ovms/CAR/UNIQUEID/metric/v/p/longitude"
+      icon: mdi:longitude
+    - name: "OVMS GPS Signal Strength"
+      state_topic: "ovms/CAR/UNIQUEID/metric/v/p/gpssq"
+      device_class: signal_strength
+      unit_of_measurement: '%'
+    - name: "OVMS GPS Time Updated"
+      state_topic: "ovms/CAR/UNIQUEID/metric/v/p/gpstime"
+      value_template: '{{ value_json | timestamp_local }}'
+      device_class: timestamp
+    - name: "OVMS 12V Battery"
+      state_topic: "ovms/CAR/UNIQUEID/metric/v/b/12v/voltage"
+      icon: mdi:car-battery
+    - name: "OVMS Battery Charging"
+      state_topic: "ovms/CAR/UNIQUEID/metric/v/c/charging"
+      icon: mdi:ev-plug-type2
+```
