@@ -211,3 +211,7 @@ Password: YOUR SETUP PASSWORD (Not in this guide)
 ```
 You should setup the intervals as fit or use the defaults.
 Once setup, you will need need to restart Server V3 (MQTT) by pressing 'Stop V3', then 'Start V3' from the 'Status' menu.
+
+## Home Assistant Configuration
+### Sensors & YAML
+
