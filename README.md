@@ -229,23 +229,84 @@ mqtt:
       icon: mdi:car-battery
   sensor:
     - name: "OVMS GPS Latitude"
-      state_topic: "ovms/CAR/UNIQUEID/metric/v/p/latitude"
+      state_topic: "ovms/mgzsev/HV20NNL/metric/v/p/latitude"
       icon: mdi:latitude
     - name: "OVMS GPS Longitude"
-      state_topic: "ovms/CAR/UNIQUEID/metric/v/p/longitude"
+      state_topic: "ovms/mgzsev/HV20NNL/metric/v/p/longitude"
       icon: mdi:longitude
     - name: "OVMS GPS Signal Strength"
-      state_topic: "ovms/CAR/UNIQUEID/metric/v/p/gpssq"
+      state_topic: "ovms/mgzsev/HV20NNL/metric/v/p/gpssq"
       device_class: signal_strength
       unit_of_measurement: '%'
     - name: "OVMS GPS Time Updated"
-      state_topic: "ovms/CAR/UNIQUEID/metric/v/p/gpstime"
+      state_topic: "ovms/mgzsev/HV20NNL/metric/v/p/gpstime"
       value_template: '{{ value_json | timestamp_local }}'
       device_class: timestamp
     - name: "OVMS 12V Battery"
-      state_topic: "ovms/CAR/UNIQUEID/metric/v/b/12v/voltage"
+      state_topic: "ovms/mgzsev/HV20NNL/metric/v/b/12v/voltage"
+      value_template: '{{ value | round(1) }}'
+      icon: mdi:car-battery
+      unit_of_measurement: 'V'
+    - name: "OVMS 12V Battery Alert"
+      state_topic: "ovms/mgzsev/HV20NNL/metric/v/b/12v/voltage/alert"
       icon: mdi:car-battery
     - name: "OVMS Battery Charging"
-      state_topic: "ovms/CAR/UNIQUEID/metric/v/c/charging"
+      state_topic: "ovms/mgzsev/HV20NNL/metric/v/c/charging"
       icon: mdi:ev-plug-type2
+    - name: "OVMS Charging State"
+      state_topic: "ovms/mgzsev/HV20NNL/metric/v/c/state"
+      icon: mdi:battery-sync
+    - name: "OVMS Charging Time Until Full"
+      state_topic: "ovms/mgzsev/HV20NNL/metric/v/c/duration/full"
+      device_class: duration
+      value_template: '{{ timedelta(minutes=value | int) }}'
+      unit_of_measurement: 'hrs'
+    - name: "OVMS Charging Current"
+      state_topic: "ovms/mgzsev/HV20NNL/metric/v/c/current"
+      device_class: apparent_power
+      unit_of_measurement: 'A'
+    - name: "OVMS Charging Voltage"
+      state_topic: "ovms/mgzsev/HV20NNL/metric/v/c/voltage"
+      device_class: voltage
+      unit_of_measurement: 'V'
+    - name: "OVMS Charging Session"
+      state_topic: "ovms/mgzsev/HV20NNL/metric/v/c/kwh"
+      value_template: '{{ value | round(1) }}'
+      unit_of_measurement: 'kW'
+      device_class: power
+    - name: "OVMS Charging Type"
+      state_topic: "ovms/mgzsev/HV20NNL/metric/v/c/type"
+      icon: mdi:ev-plug-type2
+    - name: "OVMS Battery State of Charge"
+      state_topic: "ovms/mgzsev/HV20NNL/metric/v/b/soc"
+      value_template: '{{ value | round(1) }}'
+      device_class: battery
+      unit_of_measurement: '%'
+    - name: "OVMS Battery State of Health"
+      state_topic: "ovms/mgzsev/HV20NNL/metric/v/b/soh"
+      value_template: '{{ value | round(1) }}'
+      device_class: battery
+      unit_of_measurement: '%'
+    - name: "OVMS Ideal Range"
+      state_topic: "ovms/mgzsev/HV20NNL/metric/v/b/range/ideal"
+      value_template: '{{ value | multiply(0.621371) | float | round(0) }}'
+      device_class: distance
+      unit_of_measurement: 'miles'
+    - name: "OVMS Estimated Range"
+      state_topic: "ovms/mgzsev/HV20NNL/metric/v/b/range/est"
+      value_template: '{{ value | multiply(0.621371) | float | round(0) }}'
+      device_class: distance
+      unit_of_measurement: 'miles'
+    - name: "OVMS Odometer"
+      state_topic: "ovms/mgzsev/HV20NNL/metric/v/p/odometer"
+      value_template: '{{ value | multiply(0.621371) | float | round(0) }}'
+      device_class: distance
+      unit_of_measurement: 'miles'
+      icon: mdi:speedometer
+    - name: "OVMS 4G Signal Quality"
+      state_topic: "ovms/mgzsev/HV20NNL/metric/m/net/mdm/sq"
+      device_class: signal_strength
+    - name: "OVMS 4G Network Reg"
+      state_topic: "ovms/mgzsev/HV20NNL/metric/m/net/mdm/netreg"
+      icon: mdi:radio-tower
 ```
